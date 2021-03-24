@@ -8,7 +8,6 @@ namespace MarsRover.Rover
 
         public Cardinality Cardinality { get; }
         
-
         public RoverPosition(int x, int y, Cardinality cardinality)
         {
             X = x;
@@ -34,6 +33,11 @@ namespace MarsRover.Rover
         public RoverPosition Left()
         {
             return new(X - 1, Y, Cardinality);
+        }
+
+        public RoverPosition With(Cardinality cardinality)
+        {
+            return new(X, Y, cardinality);
         }
     }
 }

@@ -2,7 +2,7 @@ using System;
 
 namespace MarsRover.Rover.Instruction
 {
-    public class MoveCommand : IInstructionCommand
+    public class MoveCommand : InstructionCommand
     {
         private readonly Boundary boundary;
 

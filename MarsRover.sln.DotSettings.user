@@ -7,5 +7,7 @@
     &lt;TestId&gt;xUnit::CB6AD2ED-D0EC-463D-9D79-2726ADB3C606::net5.0::MarsRover.Test.Rover.Instruction.MoveCommandTests.MoveOnePositionDownWhenRoverCardinalityIsEast&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::CB6AD2ED-D0EC-463D-9D79-2726ADB3C606::net5.0::MarsRover.Test.Rover.Instruction.MoveCommandTests.MoveOnePositionDownWhenRoverCardinalityIsSouth&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::CB6AD2ED-D0EC-463D-9D79-2726ADB3C606::net5.0::MarsRover.Test.Rover.Instruction.MoveCommandTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CB6AD2ED-D0EC-463D-9D79-2726ADB3C606::net5.0::MarsRover.Test.Rover.Instruction.LeftRotateCommandTests.RotateAntiClockWise&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::CB6AD2ED-D0EC-463D-9D79-2726ADB3C606::net5.0::MarsRover.Test.Rover.Instruction.RightRotateCommandTests&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

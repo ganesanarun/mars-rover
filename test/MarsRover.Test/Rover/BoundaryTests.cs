@@ -27,7 +27,7 @@ namespace MarsRover.Test.Rover
         }
 
         [Fact]
-        public void ReturnFalseWhenXCoOrdinateIsNotWithinBoundary()
+        public void ReturnFalseWhenXAndYCoordinateIsNotWithinBoundary()
         {
             var boundary = new Boundary(0, 5, 0, 5);
             var extremeXPosition = new RoverPosition(-1, 0, Cardinality.E);

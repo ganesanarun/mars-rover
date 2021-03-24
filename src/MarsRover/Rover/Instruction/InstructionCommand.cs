@@ -1,6 +1,6 @@
 namespace MarsRover.Rover.Instruction
 {
-    public interface IInstructionCommand
+    public interface InstructionCommand
     {
         (RoverPosition? position, InvalidCommandError? error) Execute(RoverPosition position);
     }
