@@ -3,12 +3,12 @@ using MarsRover.Rover;
 using MarsRover.Rover.Instruction;
 using Xunit;
 
-namespace MarsRover.Test.Rover.Instruction
+namespace MarsRover.Test.Rover
 {
-    public class InstructionControllerTests
+    public class RoverTests
     {
         [Fact]
-        public void ReturnTheNewPositionAccordingToTheCurrentPositionIfTheCommands()
+        public void MoveRoverWhenCommandsAreProper()
         {
             var boundary = new Boundary(0, 5, 0, 5);
             var leftRotateCommand = new LeftRotateCommand();
@@ -27,30 +27,31 @@ namespace MarsRover.Test.Rover.Instruction
                 moveCommand,
                 moveCommand
             };
+            var rover = new MarsRover.Rover.Rover("Rover1", currentPosition, instructionController);
 
-            var (roverPosition, invalidCommandError) = instructionController.Receive(
-                currentPosition,
-                instructions);
+            var invalidCommandError = rover.Receive(instructions);
 
             invalidCommandError.Should().BeNull();
-            roverPosition.Should().BeEquivalentTo(new RoverPosition(1, 3, Cardinality.N));
+            rover.CurrentPosition.Should().BeEquivalentTo(new RoverPosition(1, 3, Cardinality.N));
         }
 
         [Fact]
-        public void ReturnErrorWhenRandomCommandsWhereGiven()
+        public void ReturnAnErrorWhenInstructionsAreMakingItMoveBeyondTheBoundaryAndCurrentPositionShouldNotChange()
         {
             var boundary = new Boundary(0, 5, 0, 5);
             var moveCommand = new MoveCommand(boundary);
-            var currentPosition = new RoverPosition(5, 5, Cardinality.N);
-            var instructionCommands = new InstructionCommand[] {moveCommand};
+            var currentPosition = new RoverPosition(5, 5, Cardinality.E);
             var instructionController = new InstructionController();
+            var instructions = new InstructionCommand[]
+            {
+                moveCommand
+            };
+            var rover = new MarsRover.Rover.Rover("Rover1", currentPosition, instructionController);
 
-            var (position, invalidCommandError) = instructionController.Receive(
-                currentPosition,
-                instructionCommands);
+            var invalidCommandError = rover.Receive(instructions);
 
             invalidCommandError.Should().NotBeNull();
-            position.Should().BeNull();
+            rover.CurrentPosition.Should().BeEquivalentTo(currentPosition);
         }
     }
 }

@@ -4,11 +4,11 @@ namespace MarsRover.Rover.Instruction
 {
     public class MoveCommand : InstructionCommand
     {
-        public Boundary Boundary { get; private set; }
+        public Boundary Boundary { get; }
 
         public MoveCommand(Boundary boundary)
         {
-            this.Boundary = boundary;
+            Boundary = boundary;
         }
 
         public (RoverPosition? position, InvalidCommandError? error) Execute(RoverPosition position)

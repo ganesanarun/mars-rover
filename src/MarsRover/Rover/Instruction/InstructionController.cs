@@ -1,24 +1,19 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MarsRover.Rover.Instruction
 {
-    public static class InstructionController
+    public class InstructionController
     {
-        public static InvalidCommandError? Control(Rover thisRover, IEnumerable<InstructionCommand> commands)
+        // ReSharper disable once CA1822
+        public (RoverPosition?, InvalidCommandError?) Receive(RoverPosition currentPosition,
+            IEnumerable<InstructionCommand> commands)
         {
-            foreach (var instructionCommand in commands)
-            {
-                var (position, error) = instructionCommand.Execute(thisRover.CurrentPosition);
+            RoverPosition? position = currentPosition;
+            InvalidCommandError? e = null;
 
-                if (error != null)
-                {
-                    return error;
-                }
-
-                thisRover.MoveTo(position!.Value);
-            }
-
-            return null;
+            return commands.ToList().Aggregate((position, e),
+                (o, command) => o.e == null ? command.Execute(o.position!.Value) : o);
         }
     }
 }

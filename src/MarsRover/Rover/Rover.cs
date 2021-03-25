@@ -1,9 +1,15 @@
+using System.Collections.Generic;
+using MarsRover.Rover.Instruction;
+
 namespace MarsRover.Rover
 {
     public class Rover
     {
-        public Rover(string id, RoverPosition currentPosition)
+        private readonly InstructionController controller;
+
+        public Rover(string id, RoverPosition currentPosition, InstructionController controller)
         {
+            this.controller = controller;
             Id = id;
             CurrentPosition = currentPosition;
         }
@@ -12,9 +18,16 @@ namespace MarsRover.Rover
 
         public RoverPosition CurrentPosition { get; private set; }
 
-        public void MoveTo(RoverPosition thisPosition)
+        public InvalidCommandError? Receive(IEnumerable<InstructionCommand> instructions)
         {
-            CurrentPosition = thisPosition;
+            var (position, error) = controller.Receive(CurrentPosition, instructions);
+            if (error != null)
+            {
+                return error;
+            }
+
+            CurrentPosition = position!.Value;
+            return null;
         }
     }
 }
