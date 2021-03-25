@@ -11,7 +11,7 @@ namespace MarsRover.Test.Rover.Instruction
         [Fact]
         public void MoveOnePositionDownWhenRoverCardinalityIsSouth()
         {
-            var boundary = new Boundary(0, 5, 0, 5);
+            var boundary = Boundary.WithMaximumXAndY(5, 5);
             var moveCommand = new MoveCommand(boundary);
             var roverPosition = new RoverPosition(1, 1, Cardinality.S);
             var expectedPosition = new RoverPosition(roverPosition.X, roverPosition.Y - 1, roverPosition.Cardinality);
@@ -25,7 +25,7 @@ namespace MarsRover.Test.Rover.Instruction
         [Fact]
         public void MoveOnePositionUpWhenRoverCardinalityIsNorth()
         {
-            var boundary = new Boundary(0, 5, 0, 5);
+            var boundary = Boundary.WithMaximumXAndY(5, 5);
             var moveCommand = new MoveCommand(boundary);
             var roverPosition = new RoverPosition(1, 0, Cardinality.N);
             var expectedPosition = new RoverPosition(roverPosition.X, roverPosition.Y + 1, roverPosition.Cardinality);
@@ -39,7 +39,7 @@ namespace MarsRover.Test.Rover.Instruction
         [Fact]
         public void MoveOnePositionLeftWhenRoverCardinalityIsWest()
         {
-            var boundary = new Boundary(0, 5, 0, 5);
+            var boundary = Boundary.WithMaximumXAndY(5, 5);
             var moveCommand = new MoveCommand(boundary);
             var roverPosition = new RoverPosition(1, 1, Cardinality.W);
             var expectedPosition = new RoverPosition(roverPosition.X - 1, roverPosition.Y, roverPosition.Cardinality);
@@ -53,7 +53,7 @@ namespace MarsRover.Test.Rover.Instruction
         [Fact]
         public void MoveOnePositionRightWhenRoverCardinalityIsEast()
         {
-            var boundary = new Boundary(0, 5, 0, 5);
+            var boundary = Boundary.WithMaximumXAndY(5, 5);
             var moveCommand = new MoveCommand(boundary);
             var roverPosition = new RoverPosition(1, 1, Cardinality.E);
             var expectedPosition = new RoverPosition(roverPosition.X + 1, roverPosition.Y, roverPosition.Cardinality);
@@ -68,7 +68,7 @@ namespace MarsRover.Test.Rover.Instruction
         [MemberData(nameof(OnBoundaryData))]
         public void ReturnErrorWhenTryToMoveBeyondBoundary(RoverPosition roverPosition)
         {
-            var boundary = new Boundary(0, 5, 0, 5);
+            var boundary = Boundary.WithMaximumXAndY(5, 5);
             var moveCommand = new MoveCommand(boundary);
 
             var (position, error) = moveCommand.Execute(roverPosition);

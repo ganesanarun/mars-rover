@@ -10,7 +10,7 @@ namespace MarsRover.Test.Rover
         [Fact]
         public void MoveRoverWhenCommandsAreProper()
         {
-            var boundary = new Boundary(0, 5, 0, 5);
+            var boundary = Boundary.WithMaximumXAndY(5, 5);
             var leftRotateCommand = new LeftRotateCommand();
             var moveCommand = new MoveCommand(boundary);
             var currentPosition = new RoverPosition(1, 2, Cardinality.N);
@@ -38,7 +38,7 @@ namespace MarsRover.Test.Rover
         [Fact]
         public void ReturnAnErrorWhenInstructionsAreMakingItMoveBeyondTheBoundaryAndCurrentPositionShouldNotChange()
         {
-            var boundary = new Boundary(0, 5, 0, 5);
+            var boundary = Boundary.WithMaximumXAndY(5, 5);
             var moveCommand = new MoveCommand(boundary);
             var currentPosition = new RoverPosition(5, 5, Cardinality.E);
             var instructionController = new InstructionController();

@@ -19,5 +19,10 @@ namespace MarsRover.Rover
         {
             return position.X >= minimumX && position.X <= maximumX && position.Y >= minimumY && position.Y <= maximumY;
         }
+
+        public static Boundary WithMaximumXAndY(int maximumX, int maximumY)
+        {
+            return new(0, maximumX, 0, maximumY);
+        }
     }
 }

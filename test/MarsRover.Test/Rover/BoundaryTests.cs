@@ -9,7 +9,7 @@ namespace MarsRover.Test.Rover
         [Fact]
         public void ReturnTrueWhenPositionIsWithinBoundary()
         {
-            var boundary = new Boundary(0, 5, 0, 5);
+            var boundary = Boundary.WithMaximumXAndY(5, 5);
             var inclusiveMinXPosition = new RoverPosition(0, 1, Cardinality.E);
             var inclusiveMaxXPosition = new RoverPosition(5, 0, Cardinality.E);
             var inclusiveMinYPosition = new RoverPosition(1, 0, Cardinality.E);
@@ -29,7 +29,7 @@ namespace MarsRover.Test.Rover
         [Fact]
         public void ReturnFalseWhenXAndYCoordinateIsNotWithinBoundary()
         {
-            var boundary = new Boundary(0, 5, 0, 5);
+            var boundary = Boundary.WithMaximumXAndY(5, 5);
             var extremeXPosition = new RoverPosition(-1, 0, Cardinality.E);
             var extremeYPosition = new RoverPosition(0, -1, Cardinality.E);
             var farBeyondXPosition = new RoverPosition(6, 0, Cardinality.E);
