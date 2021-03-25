@@ -2,7 +2,7 @@ using System;
 
 namespace MarsRover.Rover.Instruction
 {
-    public class LeftRotateCommand : InstructionCommand
+    public readonly struct LeftRotateCommand : InstructionCommand
     {
         public (RoverPosition? position, InvalidCommandError? error) Execute(RoverPosition position)
         {

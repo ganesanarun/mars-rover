@@ -1,6 +1,6 @@
 namespace MarsRover.Rover
 {
-    public class Boundary
+    public readonly struct Boundary
     {
         private readonly int minimumX;
         private readonly int maximumX;
@@ -17,7 +17,7 @@ namespace MarsRover.Rover
 
         public bool IsAllowedPosition(RoverPosition position)
         {
-            return position.X >= minimumX && position.X < maximumX && position.Y >= minimumY && position.Y < maximumY;
+            return position.X >= minimumX && position.X <= maximumX && position.Y >= minimumY && position.Y <= maximumY;
         }
     }
 }

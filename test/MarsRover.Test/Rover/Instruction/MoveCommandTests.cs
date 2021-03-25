@@ -86,11 +86,11 @@ namespace MarsRover.Test.Rover.Instruction
                 },
                 new object[]
                 {
-                    new RoverPosition(4, 1, Cardinality.E)
+                    new RoverPosition(5, 1, Cardinality.E)
                 },
                 new object[]
                 {
-                    new RoverPosition(1, 4, Cardinality.N)
+                    new RoverPosition(1, 5, Cardinality.N)
                 },
                 new object[]
                 {

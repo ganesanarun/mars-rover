@@ -4,11 +4,11 @@ namespace MarsRover.Rover.Instruction
 {
     public class MoveCommand : InstructionCommand
     {
-        private readonly Boundary boundary;
+        public Boundary Boundary { get; private set; }
 
         public MoveCommand(Boundary boundary)
         {
-            this.boundary = boundary;
+            this.Boundary = boundary;
         }
 
         public (RoverPosition? position, InvalidCommandError? error) Execute(RoverPosition position)
@@ -22,7 +22,7 @@ namespace MarsRover.Rover.Instruction
                 _ => throw new ArgumentOutOfRangeException()
             };
 
-            return boundary.IsAllowedPosition(nextPossiblePosition)
+            return Boundary.IsAllowedPosition(nextPossiblePosition)
                 ? (nextPossiblePosition, null)
                 : (null, new InvalidCommandError());
         }
