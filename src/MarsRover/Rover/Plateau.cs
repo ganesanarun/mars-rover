@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MarsRover.Rover
 {
@@ -24,6 +26,11 @@ namespace MarsRover.Rover
         {
             rovers.TryGetValue(id, out var key);
             return key;
+        }
+
+        public IEnumerable<Rover> AllRovers()
+        {
+            return rovers.Values.Select(rover => rover);
         }
     }
 }

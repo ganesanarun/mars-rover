@@ -1,3 +1,4 @@
+using System.Linq;
 using MarsRover.Rover;
 using MarsRover.Rover.Instruction;
 
@@ -5,7 +6,7 @@ namespace MarsRover.UserInteraction
 {
     public class RoverController
     {
-        public Plateau? Plateau { get; set; }
+        private Plateau? plateau;
 
         public InvalidCommandError? Next(string input)
         {
@@ -22,12 +23,12 @@ namespace MarsRover.UserInteraction
 
         private InvalidCommandError? Handle(RoverMoveInstruction roverMoveInstruction)
         {
-            if (Plateau == null)
+            if (plateau == null)
             {
                 return new InvalidCommandError("No plateau to land the rover");
             }
 
-            var roverWithThis = Plateau.GetRoverWithThis(roverMoveInstruction.RoverId);
+            var roverWithThis = plateau.GetRoverWithThis(roverMoveInstruction.RoverId);
             if (roverWithThis == null)
             {
                 return new InvalidCommandError($"Unknown rover {roverMoveInstruction.RoverId}");
@@ -40,12 +41,12 @@ namespace MarsRover.UserInteraction
 
         private InvalidCommandError? Handle(RoverLandingInstruction landingInstruction)
         {
-            if (Plateau == null)
+            if (plateau == null)
             {
                 return new InvalidCommandError("No plateau to land the rover");
             }
 
-            Plateau.Land(new Rover.Rover(landingInstruction.RoverId,
+            plateau.Land(new Rover.Rover(landingInstruction.RoverId,
                 new RoverPosition(landingInstruction.X, landingInstruction.Y, landingInstruction.Cardinality),
                 new InstructionProcessor()));
             return null;
@@ -53,9 +54,16 @@ namespace MarsRover.UserInteraction
 
         private InvalidCommandError? Handle(PlateauInstruction plateauInstruction)
         {
-            Plateau = new Plateau(Boundary.WithMaximumXAndY(plateauInstruction.MaximumX,
+            plateau = new Plateau(Boundary.WithMaximumXAndY(plateauInstruction.MaximumX,
                 plateauInstruction.MaximumY));
             return null;
+        }
+
+        // It can be converted "Result or Get Instruction"
+        public string? Handle(NoOpInstruction resultInstruction)
+        {
+            return plateau?.AllRovers()
+                .Aggregate("", (result, rover) => result == "" ? $"{rover}" : $"{result}\n{rover}");
         }
     }
 }

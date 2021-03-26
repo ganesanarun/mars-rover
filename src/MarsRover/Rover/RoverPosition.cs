@@ -7,7 +7,7 @@ namespace MarsRover.Rover
         public int Y { get; }
 
         public Cardinality Cardinality { get; }
-        
+
         public RoverPosition(int x, int y, Cardinality cardinality)
         {
             X = x;
@@ -38,6 +38,11 @@ namespace MarsRover.Rover
         public RoverPosition With(Cardinality cardinality)
         {
             return new(X, Y, cardinality);
+        }
+
+        public override string ToString()
+        {
+            return $"{X} {Y} {Cardinality}";
         }
     }
 }

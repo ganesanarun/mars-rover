@@ -19,16 +19,10 @@ namespace MarsRover.Test.UserInteraction
             roverController.Next($"{rover1Id}  Instructions:LMLMLMLMM");
             roverController.Next($"{rover2Id} Landing:3 3 E");
             roverController.Next($"{rover2Id} Instructions:MMRMMRMRRM");
+            var output = roverController.Handle(new NoOpInstruction());
 
-            roverController.Plateau.Should().NotBeNull();
-            var rover1 = roverController.Plateau!.GetRoverWithThis(rover1Id);
-            rover1.Should().NotBeNull();
-            rover1!.Id.Should().Be(rover1Id);
-            rover1.CurrentPosition.Should().Be(new RoverPosition(1, 3, Cardinality.N));
-            var rover2 = roverController.Plateau!.GetRoverWithThis(rover2Id);
-            rover2.Should().NotBeNull();
-            rover2!.Id.Should().Be(rover2Id);
-            rover2.CurrentPosition.Should().Be(new RoverPosition(5, 1, Cardinality.E));
+            output.Should().NotBeNull();
+            output.Should().Be("Rover1: 1 3 N\nRover2: 5 1 E");
         }
 
         [Fact]

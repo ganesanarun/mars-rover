@@ -9,7 +9,7 @@ namespace MarsRover.Rover
 
         private Boundary? currentBoundary;
         public string Id { get; }
-        
+
         public Rover(string id, RoverPosition currentPosition, InstructionProcessor processor)
         {
             this.processor = processor;
@@ -42,6 +42,11 @@ namespace MarsRover.Rover
         public void SetBoundary(Boundary boundary)
         {
             currentBoundary = boundary;
+        }
+
+        public override string ToString()
+        {
+            return $"{Id}: {CurrentPosition}";
         }
     }
 }
