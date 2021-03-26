@@ -8,7 +8,6 @@ namespace MarsRover.Rover
         private readonly InstructionProcessor processor;
 
         private Boundary? currentBoundary;
-        public string Id { get; }
 
         public Rover(string id, RoverPosition currentPosition, InstructionProcessor processor)
         {
@@ -16,6 +15,8 @@ namespace MarsRover.Rover
             Id = id;
             CurrentPosition = currentPosition;
         }
+
+        public string Id { get; }
 
         public RoverPosition CurrentPosition { get; private set; }
 

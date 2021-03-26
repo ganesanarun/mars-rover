@@ -55,7 +55,7 @@ namespace MarsRover.Test.Rover
             invalidCommandError.Should().NotBeNull();
             rover.CurrentPosition.Should().BeEquivalentTo(currentPosition);
         }
-        
+
         [Fact]
         public void MoveOneLevelLeftWhenThereIsNoBoundary()
         {

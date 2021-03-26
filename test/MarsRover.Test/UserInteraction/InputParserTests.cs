@@ -22,7 +22,7 @@ namespace MarsRover.Test.UserInteraction
 
             instruction.Should().Be(new RoverLandingInstruction("Rover1", 1, 2, Cardinality.N));
         }
-        
+
         [Fact]
         public void ReturnRoverMovingInstruction()
         {

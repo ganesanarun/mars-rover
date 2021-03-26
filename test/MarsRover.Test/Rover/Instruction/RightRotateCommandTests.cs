@@ -8,17 +8,6 @@ namespace MarsRover.Test.Rover.Instruction
 {
     public class RightRotateCommandTests
     {
-        [Theory]
-        [MemberData(nameof(InputWithExpectedOutput))]
-        public void RotateClockWise(RoverPosition currentPosition, RoverPosition expectedPosition)
-        {
-            var leftRotateCommand = new RightRotateCommand();
-
-            var position = leftRotateCommand.Execute(currentPosition);
-
-            position.Should().BeEquivalentTo(expectedPosition);
-        }
-
         public static IEnumerable<object[]> InputWithExpectedOutput =>
             new List<object[]>
             {
@@ -39,5 +28,16 @@ namespace MarsRover.Test.Rover.Instruction
                     new RoverPosition(0, 0, Cardinality.S), new RoverPosition(0, 0, Cardinality.W)
                 }
             };
+
+        [Theory]
+        [MemberData(nameof(InputWithExpectedOutput))]
+        public void RotateClockWise(RoverPosition currentPosition, RoverPosition expectedPosition)
+        {
+            var leftRotateCommand = new RightRotateCommand();
+
+            var position = leftRotateCommand.Execute(currentPosition);
+
+            position.Should().BeEquivalentTo(expectedPosition);
+        }
     }
 }

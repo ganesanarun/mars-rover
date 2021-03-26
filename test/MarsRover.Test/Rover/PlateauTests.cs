@@ -19,7 +19,7 @@ namespace MarsRover.Test.Rover
 
             actualRover.Should().Be(thisRover);
         }
-        
+
         [Fact]
         public void ReturnNullWhenRoverExists()
         {

@@ -18,7 +18,10 @@ namespace MarsRover
                 }
 
                 var invalidCommandError = roverController.Next(input);
-                if (invalidCommandError == null) continue;
+                if (invalidCommandError == null)
+                {
+                    continue;
+                }
 
                 Console.WriteLine(invalidCommandError.Message);
                 return;

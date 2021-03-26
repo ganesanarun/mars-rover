@@ -1,5 +1,4 @@
 using FluentAssertions;
-using MarsRover.Rover;
 using MarsRover.UserInteraction;
 using Xunit;
 

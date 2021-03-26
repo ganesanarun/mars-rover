@@ -14,7 +14,7 @@ namespace MarsRover.Test.Rover.Instruction
             var roverPosition = new RoverPosition(1, 1, Cardinality.S);
             var expectedPosition = new RoverPosition(roverPosition.X, roverPosition.Y - 1, roverPosition.Cardinality);
 
-            var position= moveCommand.Execute(roverPosition);
+            var position = moveCommand.Execute(roverPosition);
 
             position.Should().Be(expectedPosition);
         }
@@ -26,7 +26,7 @@ namespace MarsRover.Test.Rover.Instruction
             var roverPosition = new RoverPosition(1, 0, Cardinality.N);
             var expectedPosition = new RoverPosition(roverPosition.X, roverPosition.Y + 1, roverPosition.Cardinality);
 
-            var position  = moveCommand.Execute(roverPosition);
+            var position = moveCommand.Execute(roverPosition);
 
             position.Should().Be(expectedPosition);
         }
@@ -38,7 +38,7 @@ namespace MarsRover.Test.Rover.Instruction
             var roverPosition = new RoverPosition(1, 1, Cardinality.W);
             var expectedPosition = new RoverPosition(roverPosition.X - 1, roverPosition.Y, roverPosition.Cardinality);
 
-            var position= moveCommand.Execute(roverPosition);
+            var position = moveCommand.Execute(roverPosition);
 
             position.Should().Be(expectedPosition);
         }

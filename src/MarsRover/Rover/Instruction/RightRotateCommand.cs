@@ -1,5 +1,3 @@
-using System;
-
 namespace MarsRover.Rover.Instruction
 {
     public readonly struct RightRotateCommand : InstructionCommand
