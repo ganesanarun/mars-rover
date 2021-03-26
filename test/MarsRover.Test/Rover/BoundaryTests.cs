@@ -15,10 +15,10 @@ namespace MarsRover.Test.Rover
             var inclusiveMinYPosition = new RoverPosition(1, 0, Cardinality.E);
             var inclusiveMaxYPosition = new RoverPosition(0, 5, Cardinality.E);
 
-            var inclusiveXResult = boundary.IsAllowedPosition(inclusiveMinXPosition);
-            var inclusiveYResult = boundary.IsAllowedPosition(inclusiveMinYPosition);
-            var inclusiveMaxXResult = boundary.IsAllowedPosition(inclusiveMaxXPosition);
-            var inclusiveMaxYResult = boundary.IsAllowedPosition(inclusiveMaxYPosition);
+            var inclusiveXResult = boundary.CanIMoveToThis(inclusiveMinXPosition);
+            var inclusiveYResult = boundary.CanIMoveToThis(inclusiveMinYPosition);
+            var inclusiveMaxXResult = boundary.CanIMoveToThis(inclusiveMaxXPosition);
+            var inclusiveMaxYResult = boundary.CanIMoveToThis(inclusiveMaxYPosition);
 
             inclusiveXResult.Should().BeTrue();
             inclusiveYResult.Should().BeTrue();
@@ -35,10 +35,10 @@ namespace MarsRover.Test.Rover
             var farBeyondXPosition = new RoverPosition(6, 0, Cardinality.E);
             var farBeyondYPosition = new RoverPosition(0, 6, Cardinality.E);
 
-            var extremeLeftResult = boundary.IsAllowedPosition(extremeXPosition);
-            var extremeYResult = boundary.IsAllowedPosition(extremeYPosition);
-            var farBeyondXLimitResult = boundary.IsAllowedPosition(farBeyondXPosition);
-            var farBeyondYLimitResult = boundary.IsAllowedPosition(farBeyondYPosition);
+            var extremeLeftResult = boundary.CanIMoveToThis(extremeXPosition);
+            var extremeYResult = boundary.CanIMoveToThis(extremeYPosition);
+            var farBeyondXLimitResult = boundary.CanIMoveToThis(farBeyondXPosition);
+            var farBeyondYLimitResult = boundary.CanIMoveToThis(farBeyondYPosition);
 
             extremeLeftResult.Should().BeFalse();
             extremeYResult.Should().BeFalse();

@@ -17,6 +17,7 @@ namespace MarsRover.Rover
         public void Land(Rover thisRover)
         {
             rovers.Add(thisRover.Id, thisRover);
+            thisRover.SetBoundary(boundary);
         }
 
         public Rover? GetRoverWithThis(string id)

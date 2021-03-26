@@ -4,7 +4,7 @@ namespace MarsRover.Rover.Instruction
 {
     public readonly struct LeftRotateCommand : InstructionCommand
     {
-        public (RoverPosition? position, InvalidCommandError? error) Execute(RoverPosition position)
+        public RoverPosition Execute(RoverPosition position)
         {
             var cardinality = position.Cardinality switch
             {
@@ -12,9 +12,9 @@ namespace MarsRover.Rover.Instruction
                 Cardinality.S => Cardinality.E,
                 Cardinality.E => Cardinality.N,
                 Cardinality.W => Cardinality.S,
-                _ => throw new ArgumentOutOfRangeException()
+                _ => position.Cardinality
             };
-            return (position.With(cardinality), null);
+            return position.With(cardinality);
         }
     }
 }

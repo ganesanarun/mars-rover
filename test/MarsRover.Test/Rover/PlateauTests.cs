@@ -12,7 +12,7 @@ namespace MarsRover.Test.Rover
         {
             var plateau = new Plateau(Boundary.WithMaximumXAndY(5, 5));
             const string roverId = "Rover1";
-            var thisRover = new MarsRover.Rover.Rover(roverId, new RoverPosition(), new InstructionController());
+            var thisRover = new MarsRover.Rover.Rover(roverId, new RoverPosition(), new InstructionProcessor());
             plateau.Land(thisRover);
 
             var actualRover = plateau.GetRoverWithThis(roverId);

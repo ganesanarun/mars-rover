@@ -14,10 +14,9 @@ namespace MarsRover.Test.Rover.Instruction
         {
             var leftRotateCommand = new RightRotateCommand();
 
-            var (position, error) = leftRotateCommand.Execute(currentPosition);
+            var position = leftRotateCommand.Execute(currentPosition);
 
             position.Should().BeEquivalentTo(expectedPosition);
-            error.Should().BeNull();
         }
 
         public static IEnumerable<object[]> InputWithExpectedOutput =>

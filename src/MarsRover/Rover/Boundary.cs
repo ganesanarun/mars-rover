@@ -15,7 +15,7 @@ namespace MarsRover.Rover
             this.maximumY = maximumY;
         }
 
-        public bool IsAllowedPosition(RoverPosition position)
+        public bool CanIMoveToThis(RoverPosition position)
         {
             return position.X >= minimumX && position.X <= maximumX && position.Y >= minimumY && position.Y <= maximumY;
         }

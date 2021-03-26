@@ -6,16 +6,16 @@ namespace MarsRover.Rover.Instruction
 {
     public static class InstructionParser
     {
-        public static IEnumerable<InstructionCommand> Parse(string input, Boundary boundary)
+        public static IEnumerable<InstructionCommand> Parse(string input)
         {
-            return input.ToUpperInvariant().ToCharArray().Select(character => From(character, boundary)).ToList();
+            return input.ToUpperInvariant().ToCharArray().Select(From).ToList();
         }
 
-        private static InstructionCommand From(char inputCharacter, Boundary boundary)
+        private static InstructionCommand From(char inputCharacter)
         {
             return inputCharacter switch
             {
-                'M' => new MoveCommand(boundary),
+                'M' => new MoveCommand(),
                 'R' => new RightRotateCommand(),
                 'L' => new LeftRotateCommand(),
                 _ => throw new ArgumentException("Invalid input command")

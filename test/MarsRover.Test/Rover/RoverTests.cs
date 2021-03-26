@@ -12,9 +12,9 @@ namespace MarsRover.Test.Rover
         {
             var boundary = Boundary.WithMaximumXAndY(5, 5);
             var leftRotateCommand = new LeftRotateCommand();
-            var moveCommand = new MoveCommand(boundary);
+            var moveCommand = new MoveCommand();
             var currentPosition = new RoverPosition(1, 2, Cardinality.N);
-            var instructionController = new InstructionController();
+            var instructionController = new InstructionProcessor();
             var instructions = new InstructionCommand[]
             {
                 leftRotateCommand,
@@ -28,8 +28,9 @@ namespace MarsRover.Test.Rover
                 moveCommand
             };
             var rover = new MarsRover.Rover.Rover("Rover1", currentPosition, instructionController);
+            rover.SetBoundary(boundary);
 
-            var invalidCommandError = rover.Receive(instructions);
+            var invalidCommandError = rover.FollowThe(instructions);
 
             invalidCommandError.Should().BeNull();
             rover.CurrentPosition.Should().BeEquivalentTo(new RoverPosition(1, 3, Cardinality.N));
@@ -39,19 +40,38 @@ namespace MarsRover.Test.Rover
         public void ReturnAnErrorWhenInstructionsAreMakingItMoveBeyondTheBoundaryAndCurrentPositionShouldNotChange()
         {
             var boundary = Boundary.WithMaximumXAndY(5, 5);
-            var moveCommand = new MoveCommand(boundary);
+            var moveCommand = new MoveCommand();
             var currentPosition = new RoverPosition(5, 5, Cardinality.E);
-            var instructionController = new InstructionController();
+            var instructionController = new InstructionProcessor();
+            var instructions = new InstructionCommand[]
+            {
+                moveCommand
+            };
+            var rover = new MarsRover.Rover.Rover("Rover1", currentPosition, instructionController);
+            rover.SetBoundary(boundary);
+
+            var invalidCommandError = rover.FollowThe(instructions);
+
+            invalidCommandError.Should().NotBeNull();
+            rover.CurrentPosition.Should().BeEquivalentTo(currentPosition);
+        }
+        
+        [Fact]
+        public void MoveOneLevelLeftWhenThereIsNoBoundary()
+        {
+            var moveCommand = new MoveCommand();
+            var currentPosition = new RoverPosition(5, 5, Cardinality.E);
+            var instructionController = new InstructionProcessor();
             var instructions = new InstructionCommand[]
             {
                 moveCommand
             };
             var rover = new MarsRover.Rover.Rover("Rover1", currentPosition, instructionController);
 
-            var invalidCommandError = rover.Receive(instructions);
+            var invalidCommandError = rover.FollowThe(instructions);
 
-            invalidCommandError.Should().NotBeNull();
-            rover.CurrentPosition.Should().BeEquivalentTo(currentPosition);
+            invalidCommandError.Should().BeNull();
+            rover.CurrentPosition.Should().BeEquivalentTo(new RoverPosition(6, 5, Cardinality.E));
         }
     }
 }

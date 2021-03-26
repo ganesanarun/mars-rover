@@ -5,29 +5,43 @@ namespace MarsRover.Rover
 {
     public class Rover
     {
-        private readonly InstructionController controller;
+        private readonly InstructionProcessor processor;
 
-        public Rover(string id, RoverPosition currentPosition, InstructionController controller)
+        private Boundary? currentBoundary;
+        public string Id { get; }
+        
+        public Rover(string id, RoverPosition currentPosition, InstructionProcessor processor)
         {
-            this.controller = controller;
+            this.processor = processor;
             Id = id;
             CurrentPosition = currentPosition;
         }
 
-        public string Id { get; private set; }
-
         public RoverPosition CurrentPosition { get; private set; }
 
-        public InvalidCommandError? Receive(IEnumerable<InstructionCommand> instructions)
+        public InvalidCommandError? FollowThe(IEnumerable<InstructionCommand> instructions)
         {
-            var (position, error) = controller.Receive(CurrentPosition, instructions);
-            if (error != null)
+            var position = processor.Process(CurrentPosition, instructions);
+            if (currentBoundary == null)
             {
-                return error;
+                CurrentPosition = position;
+                return null;
             }
 
-            CurrentPosition = position!.Value;
+            var yes = currentBoundary.Value.CanIMoveToThis(position);
+
+            if (!yes)
+            {
+                return new InvalidCommandError();
+            }
+
+            CurrentPosition = position;
             return null;
+        }
+
+        public void SetBoundary(Boundary boundary)
+        {
+            currentBoundary = boundary;
         }
     }
 }
