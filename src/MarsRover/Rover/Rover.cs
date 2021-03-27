@@ -22,21 +22,21 @@ namespace MarsRover.Rover
 
         public InvalidCommandError? FollowThe(IEnumerable<InstructionCommand> instructions)
         {
-            var position = processor.Process(CurrentPosition, instructions);
+            var newPosition = processor.Process(CurrentPosition, instructions);
             if (currentBoundary == null)
             {
-                CurrentPosition = position;
+                CurrentPosition = newPosition;
                 return null;
             }
 
-            var yes = currentBoundary.Value.CanIMoveToThis(position);
+            var yes = currentBoundary.Value.CanIMoveToThis(newPosition);
 
             if (!yes)
             {
                 return new InvalidCommandError();
             }
 
-            CurrentPosition = position;
+            CurrentPosition = newPosition;
             return null;
         }
 

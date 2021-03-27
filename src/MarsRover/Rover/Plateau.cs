@@ -27,9 +27,11 @@ namespace MarsRover.Rover
             return key;
         }
 
-        public IEnumerable<Rover> AllRovers()
+        public override string ToString()
         {
-            return rovers.Values.Select(rover => rover);
+            return rovers.Values
+                .Select(rover => rover)
+                .Aggregate("", (result, rover) => result == "" ? $"{rover}" : $"{result}\n{rover}");
         }
     }
 }

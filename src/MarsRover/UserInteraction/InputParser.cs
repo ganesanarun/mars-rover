@@ -15,7 +15,7 @@ namespace MarsRover.UserInteraction
             input = input.Trim();
             if (IsPlateau(input))
             {
-                return TryGetPlateauInstruction(input);
+                return GetPlateauInstruction(input);
             }
 
             if (IsLandingInstruction(input))
@@ -52,8 +52,8 @@ namespace MarsRover.UserInteraction
                 return new NoOpInstruction();
             }
 
-            var isValidX = TryParse(split[0], out var x);
-            var isValidY = TryParse(split[1], out var y);
+            var isValidX = TryParsePositiveInteger(split[0], out var x);
+            var isValidY = TryParsePositiveInteger(split[1], out var y);
             var isValidCardinality = Enum.TryParse<Cardinality>(split[2].ToUpperInvariant(), out var cardinality);
 
             return isValidX && isValidY && isValidCardinality
@@ -61,7 +61,7 @@ namespace MarsRover.UserInteraction
                 : new NoOpInstruction();
         }
 
-        private static Instruction TryGetPlateauInstruction(string invariantInput)
+        private static Instruction GetPlateauInstruction(string invariantInput)
         {
             var noOpInstruction = new NoOpInstruction();
             var split = invariantInput.Split(":");
@@ -76,11 +76,17 @@ namespace MarsRover.UserInteraction
                 return noOpInstruction;
             }
 
-            var isValidX = TryParse(sizes[0], out var maximumX);
-            var isValidY = TryParse(sizes[1], out var maximumY);
+            var isValidX = TryParsePositiveInteger(sizes[0], out var maximumX);
+            var isValidY = TryParsePositiveInteger(sizes[1], out var maximumY);
 
 
             return isValidX && isValidY ? new PlateauInstruction(maximumX, maximumY) : noOpInstruction;
+        }
+        
+        private static bool TryParsePositiveInteger(string possibleCharacter, out int position)
+        {
+            var isValidX = TryParse(possibleCharacter, out position);
+            return isValidX && position >= 0;
         }
 
         private static bool IsPlateau(string invariantInput)

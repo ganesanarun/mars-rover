@@ -1,4 +1,3 @@
-using System.Linq;
 using MarsRover.Rover;
 using MarsRover.Rover.Instruction;
 
@@ -34,7 +33,7 @@ namespace MarsRover.UserInteraction
                 return new InvalidCommandError($"Unknown rover {roverMoveInstruction.RoverId}");
             }
 
-            var instructionCommands = InstructionParser.Parse(roverMoveInstruction.Instruction);
+            var instructionCommands = InstructionParser.Parse(roverMoveInstruction.Instructions);
             roverWithThis.FollowThe(instructionCommands);
             return null;
         }
@@ -62,8 +61,7 @@ namespace MarsRover.UserInteraction
         // It can be converted "Result or Get Instruction"
         public string? Handle(NoOpInstruction resultInstruction)
         {
-            return plateau?.AllRovers()
-                .Aggregate("", (result, rover) => result == "" ? $"{rover}" : $"{result}\n{rover}");
+            return plateau?.ToString();
         }
     }
 }

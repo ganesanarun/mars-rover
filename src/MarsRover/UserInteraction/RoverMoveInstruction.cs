@@ -3,12 +3,12 @@ namespace MarsRover.UserInteraction
     public readonly struct RoverMoveInstruction : Instruction
     {
         public string RoverId { get; }
-        public string Instruction { get; }
+        public string Instructions { get; }
 
-        public RoverMoveInstruction(string roverId, string instruction)
+        public RoverMoveInstruction(string roverId, string instructions)
         {
             RoverId = roverId;
-            Instruction = instruction;
+            Instructions = instructions;
         }
     }
 }

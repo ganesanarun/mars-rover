@@ -30,5 +30,28 @@ namespace MarsRover.Test.UserInteraction
 
             instruction.Should().Be(new RoverMoveInstruction("Rover1", "LMLMLMLMM"));
         }
+
+
+        [Theory]
+        [InlineData(-5, 5)]
+        [InlineData(5, -5)]
+        [InlineData(-5, -5)]
+        public void ReturnNoOpInstructionWhenNegativeXorY(int x, int y)
+        {
+            var instruction = InputParser.Parse($"Plateau:{x} {y}");
+
+            instruction.Should().Be(new NoOpInstruction());
+        }
+
+        [Theory]
+        [InlineData(-5, 5)]
+        [InlineData(5, -5)]
+        [InlineData(-5, -5)]
+        public void ReturnNoOpInstructionWhenNegativeXorYPassedForRoverLanding(int x, int y)
+        {
+            var instruction = InputParser.Parse($"Rover1 Landing:{x} {y} N");
+
+            instruction.Should().Be(new NoOpInstruction());
+        }
     }
 }
