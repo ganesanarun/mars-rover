@@ -24,7 +24,7 @@ namespace MarsRover
                 }
 
                 Console.WriteLine(invalidCommandError.Message);
-                return;
+                break;
             }
 
             var result = roverController.Handle(new NoOpInstruction());
